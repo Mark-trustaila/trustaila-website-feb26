@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 50">
+  <rect width="34" height="50" rx="4" fill="#111827"/>
+  <!-- Ai text -->
+  <text x="3" y="31" font-family="Inter, Arial Black, sans-serif" font-weight="800" font-size="26" fill="#ffffff" letter-spacing="-0.5">Ai</text>
+  <!-- Partial underline: starts under i (~x=16), ends 3px from right border -->
+  <line x1="16" y1="33" x2="31" y2="33" stroke="#ffffff" stroke-width="1.5" stroke-linecap="square"/>
+</svg>
