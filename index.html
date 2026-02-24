@@ -82,9 +82,8 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
 .sar-sor-card{ line-height: 1.8; font-size: 1.125rem; }
 .hero-image-wrap {
   height: auto;
-  will-change: transform;
-  transform-origin: center center;
   overflow: hidden;
+  border-radius: 8px;
 }
 
 @media screen and (max-width: 991px) {
@@ -100,13 +99,11 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
 @media(max-width: 767px) {
   .hero-h1 {font-size: 2.25rem;}
   .book-btn{ font-size: 1rem; padding: 0.75rem 1rem; }    
-  .hero-image-wrap{transform: scale(1.0);}
 }
 @media(max-width: 479px) {
   .hero-h1 {font-size: 2.5rem;}
   .book-btn{ font-size: 1rem; padding: 0.75rem 1rem;}    
   .hero-img {margin-top:1rem;}
-  .hero-image-wrap{transform: scale(1.0);}
 }
 
 .hero-img{
@@ -114,7 +111,10 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
   z-index: -1;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  transform: translateZ(0);
+  will-change: transform;
+  transform: scale(1.08) translateY(0px);
+  transform-origin: center top;
+  transition: none;
 }
 
 .hero-wrapper{
@@ -747,10 +747,10 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
 <script>
 // Parallax on hero image
 function heroParallax() {
-  const img = document.querySelector('.hero-image-wrap .hero-img');
+  const img = document.querySelector('.hero-img');
   if (!img) return;
   const offset = window.scrollY * 0.25;
-  img.style.transform = 'translateY(' + offset + 'px) scale(1.12) translateZ(0)';
+  img.style.transform = 'scale(1.08) translateY(' + offset + 'px)';
 }
 window.addEventListener('scroll', heroParallax, { passive: true });
 heroParallax();
