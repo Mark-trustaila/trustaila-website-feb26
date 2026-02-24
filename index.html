@@ -85,7 +85,6 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
   will-change: transform;
   transform-origin: center center;
   overflow: hidden;
-  transform: scale(1.28);
 }
 
 @media screen and (max-width: 991px) {
@@ -253,9 +252,9 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
   background: transparent;
   color: #6b7280;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
-.step:hover { background: #f3f4f6; }
+.step:hover { background: #f3f4f6; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
 .step.active {
   background: #ffffff;
   border-left: 4px solid #1e293b;
@@ -403,6 +402,11 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
   border-radius: 10px;
   padding: 28px 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pillar-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 .pillar-num {
   font-size: 0.75rem;
@@ -741,6 +745,35 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
 </footer>
 
 <script>
+// Parallax on hero image
+function heroParallax() {
+  const wrap = document.querySelector('.hero-image-wrap');
+  if (!wrap) return;
+  const scrollY = window.scrollY;
+  const offset = scrollY * 0.35;
+  wrap.style.transform = 'translateY(' + offset + 'px) scale(1.08)';
+}
+window.addEventListener('scroll', heroParallax, { passive: true });
+heroParallax();
+
+// Fade-in sections on scroll
+const fadeEls = document.querySelectorAll('section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+fadeEls.forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  observer.observe(el);
+});
+
 async function submitModal(btn) {
   const email = document.getElementById('modal-email').value.trim();
   const company = document.getElementById('modal-company').value.trim();
