@@ -83,7 +83,11 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
 .hero-image-wrap {
   height: auto;
   overflow: hidden;
-  border-radius: 8px;
+  animation: heroFloat 1s ease-out 0.2s both;
+}
+@keyframes heroFloat {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @media screen and (max-width: 991px) {
@@ -111,10 +115,8 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
   z-index: -1;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  will-change: transform;
-  transform: scale(1.08) translateY(0px);
-  transform-origin: center top;
-  transition: none;
+  display: block;
+  width: 100%;
 }
 
 .hero-wrapper{
@@ -745,16 +747,6 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
 </footer>
 
 <script>
-// Parallax on hero image
-function heroParallax() {
-  const img = document.querySelector('.hero-img');
-  if (!img) return;
-  const offset = window.scrollY * 0.25;
-  img.style.transform = 'scale(1.08) translateY(' + offset + 'px)';
-}
-window.addEventListener('scroll', heroParallax, { passive: true });
-heroParallax();
-
 // Fade-in sections on scroll (skip hero)
 const fadeEls = document.querySelectorAll('section:not(.hero)');
 const observer = new IntersectionObserver((entries) => {
