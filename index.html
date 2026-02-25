@@ -274,6 +274,11 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
   transition: all 0.4s ease;  
 }
 .step.active .step-desc { max-height: 25rem; opacity: 1; margin-top: 6px; }
+/* DSAR steps: always show all descriptions (no accordion) */
+#dsar-steps .step { cursor: default; border-left: 4px solid #e5e7eb; }
+#dsar-steps .step:first-child { border-left: 4px solid #1e293b; }
+#dsar-steps .step .step-desc { max-height: 25rem; opacity: 1; margin-top: 6px; }
+#dsar-steps .step:hover { transform: none; box-shadow: none; background: transparent; }
 .faq-item {
   cursor: pointer;
   padding: 20px 0;
@@ -305,7 +310,7 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
 .faq-answer p { margin: 10px 0 0; }
 .section-title {text-align: center; margin-bottom: 16px; font-size: 1.8rem; font-weight: 800; line-height: 1.2; letter-spacing: -1px;}
 .section-sub {text-align: center; color: #6b7280; margin-bottom: 40px; font-size: 1.25rem;}
-@media(max-width: 768px) { .section-sub {font-size: 1.125rem;} }
+@media(max-width: 768px) { .section-sub {font-size: 1.125rem;} .assess-grid {grid-template-columns: 1fr !important;} }
 @media(max-width: 479px) { .section-sub {font-size: 1.125rem;} }
 .grid-2 {
   display: grid; 
@@ -543,23 +548,80 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
     <div class="sar-sor-card card" style="max-width:100%;width:100%;margin:0;">
       <p style="margin:0 0 20px;">AiLA handles the full DSAR workflow end-to-end. Typical processing time falls from days to hours, with the lawyer reviewing and approving a completed package rather than driving the process from scratch.</p>
       <div class="steps" id="dsar-steps">
-        <div class="step active" onclick="setDsarStep(this)">
+        <div class="step active">
           <div class="step-title">1. Screening and acknowledgment</div>
           <div class="step-desc">AiLA validates the request, checks identity, classifies against UK GDPR Article 15, and sends an ICO-compliant acknowledgment within the statutory deadline. Reasoning is shown for lawyer review.</div>
         </div>
-        <div class="step" onclick="setDsarStep(this)">
+        <div class="step">
           <div class="step-title">2. Data gathering</div>
           <div class="step-desc">AiLA searches connected systems — email, CRM, DMS, HR — for all data relating to the data subject. A PII map is built showing what was found and where.</div>
         </div>
-        <div class="step" onclick="setDsarStep(this)">
+        <div class="step">
           <div class="step-title">3. Redaction</div>
           <div class="step-desc">Third-party PII and commercially sensitive information is identified and redacted automatically. Redaction decisions are recorded for audit.</div>
         </div>
-        <div class="step" onclick="setDsarStep(this)">
+        <div class="step">
           <div class="step-title">4. Response package</div>
           <div class="step-desc">A complete package is compiled — cover letter, redacted data, exemption summary, and compliance documentation — and placed in the dashboard for lawyer approval before sending.</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- DSAR Time Estimates -->
+  <div style="max-width:720px;margin:40px auto 0;">
+    <h3 style="font-size:1.25rem;font-weight:700;text-align:center;margin-bottom:20px;color:#111827;">How long does a DSAR take?</h3>
+    <table style="width:100%;border-collapse:collapse;font-size:0.9rem;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04);">
+      <thead>
+        <tr style="background:#f9fafb;">
+          <th style="text-align:left;padding:14px 16px;font-weight:600;color:#6b7280;border-bottom:2px solid #e5e7eb;"></th>
+          <th style="text-align:center;padding:14px 16px;font-weight:600;color:#111827;border-bottom:2px solid #e5e7eb;">Consumer DSAR</th>
+          <th style="text-align:center;padding:14px 16px;font-weight:600;color:#111827;border-bottom:2px solid #e5e7eb;">Employee DSAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:12px 16px;font-weight:500;color:#374151;border-bottom:1px solid #f3f4f6;">Manual processing</td>
+          <td style="padding:12px 16px;text-align:center;color:#ef4444;font-weight:600;border-bottom:1px solid #f3f4f6;">8–15 hours</td>
+          <td style="padding:12px 16px;text-align:center;color:#ef4444;font-weight:600;border-bottom:1px solid #f3f4f6;">20–40+ hours</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px;font-weight:500;color:#374151;border-bottom:1px solid #f3f4f6;">With AiLA</td>
+          <td style="padding:12px 16px;text-align:center;color:#16a34a;font-weight:600;border-bottom:1px solid #f3f4f6;">Under 1 hour</td>
+          <td style="padding:12px 16px;text-align:center;color:#16a34a;font-weight:600;border-bottom:1px solid #f3f4f6;">2–4 hours</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px;font-weight:500;color:#374151;border-bottom:1px solid #f3f4f6;">Key difference</td>
+          <td style="padding:12px 16px;text-align:center;color:#6b7280;border-bottom:1px solid #f3f4f6;">Usually limited data sources (CRM, email)</td>
+          <td style="padding:12px 16px;text-align:center;color:#6b7280;border-bottom:1px solid #f3f4f6;">Data across HR, email, payroll, reviews, Slack/Teams</td>
+        </tr>
+        <tr>
+          <td style="padding:12px 16px;font-weight:500;color:#374151;">Common complications</td>
+          <td style="padding:12px 16px;text-align:center;color:#6b7280;">Identity verification, third-party data</td>
+          <td style="padding:12px 16px;text-align:center;color:#6b7280;">Exemption review (privilege, management planning, references)</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="text-align:center;font-size:0.8rem;color:#9ca3af;margin-top:10px;">Times are indicative and vary by organisation size, data volumes, and system complexity.</p>
+  </div>
+
+  <!-- DSAR Readiness Assessments CTA -->
+  <div style="max-width:720px;margin:40px auto 0;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:32px;">
+    <h3 style="font-size:1.15rem;font-weight:700;color:#111827;margin:0 0 8px;text-align:center;">Assess your DSAR readiness</h3>
+    <p style="text-align:center;color:#6b7280;font-size:0.95rem;margin:0 0 24px;line-height:1.6;">Not sure where you stand? These quick assessments will give you a high-level view of your current compliance position. No sign-up required.</p>
+    <div class="assess-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <a href="/dsar-assessment" style="display:block;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:20px;text-decoration:none;transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04);" onmouseover="this.style.borderColor='#111827';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='0 1px 3px rgba(0,0,0,0.04)';this.style.transform='none'">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px;">5–10 minutes</div>
+        <div style="font-weight:700;color:#111827;font-size:0.95rem;margin-bottom:6px;">DSAR Readiness Assessment</div>
+        <div style="font-size:0.85rem;color:#6b7280;line-height:1.5;margin-bottom:12px;">Evaluate your organisation's ability to handle data subject access requests efficiently and compliantly.</div>
+        <div style="font-size:0.85rem;font-weight:600;color:#111827;">Take the assessment →</div>
+      </a>
+      <a href="/ico-assessment" style="display:block;background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:20px;text-decoration:none;transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.04);" onmouseover="this.style.borderColor='#111827';this.style.boxShadow='0 4px 12px rgba(0,0,0,0.08)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='#e5e7eb';this.style.boxShadow='0 1px 3px rgba(0,0,0,0.04)';this.style.transform='none'">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9ca3af;margin-bottom:8px;">10–15 minutes</div>
+        <div style="font-weight:700;color:#111827;font-size:0.95rem;margin-bottom:6px;">ICO Accountability Assessment</div>
+        <div style="font-size:0.85rem;color:#6b7280;line-height:1.5;margin-bottom:12px;">Assess your alignment with the ICO's accountability framework — the benchmark used in audits and investigations.</div>
+        <div style="font-size:0.85rem;font-weight:600;color:#111827;">Take the assessment →</div>
+      </a>
     </div>
   </div>
 </section>
@@ -803,11 +865,6 @@ document.getElementById('contactModal').addEventListener('click', function(e) {
 
 function toggleMobileNav() {
   document.getElementById('mobileNav').classList.toggle('active');
-}
-
-function setDsarStep(el) {
-  document.querySelectorAll('#dsar-steps .step').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
 }
 
 const howVisuals = [
