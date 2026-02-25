@@ -267,18 +267,13 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
   font-size: 15px;
   line-height: 1.6;
   margin-top: 6px;
-  color: #4b5563;
-  max-height: 0;          
-  opacity: 0;             
+  color: #9ca3af;
+  max-height: 1.6em;
+  opacity: 0.7;
   overflow: hidden;
-  transition: all 0.4s ease;  
+  transition: all 0.4s ease;
 }
-.step.active .step-desc { max-height: 25rem; opacity: 1; margin-top: 6px; }
-/* DSAR steps: always show all descriptions (no accordion) */
-#dsar-steps .step { cursor: default; border-left: 4px solid #e5e7eb; }
-#dsar-steps .step:first-child { border-left: 4px solid #1e293b; }
-#dsar-steps .step .step-desc { max-height: 25rem; opacity: 1; margin-top: 6px; }
-#dsar-steps .step:hover { transform: none; box-shadow: none; background: transparent; }
+.step.active .step-desc { max-height: 25rem; opacity: 1; margin-top: 6px; color: #4b5563; }
 .faq-item {
   cursor: pointer;
   padding: 20px 0;
@@ -548,19 +543,19 @@ hr { display: block; height: 1px; border: 0; border-top: 2px solid #F2F3F5; marg
     <div class="sar-sor-card card" style="max-width:100%;width:100%;margin:0;">
       <p style="margin:0 0 20px;">AiLA handles the full DSAR workflow end-to-end. Typical processing time falls from days to hours, with the lawyer reviewing and approving a completed package rather than driving the process from scratch.</p>
       <div class="steps" id="dsar-steps">
-        <div class="step active">
+        <div class="step active" onclick="setDsarStep(this)">
           <div class="step-title">1. Screening and acknowledgment</div>
           <div class="step-desc">AiLA validates the request, checks identity, classifies against UK GDPR Article 15, and sends an ICO-compliant acknowledgment within the statutory deadline. Reasoning is shown for lawyer review.</div>
         </div>
-        <div class="step">
+        <div class="step" onclick="setDsarStep(this)">
           <div class="step-title">2. Data gathering</div>
           <div class="step-desc">AiLA searches connected systems — email, CRM, DMS, HR — for all data relating to the data subject. A PII map is built showing what was found and where.</div>
         </div>
-        <div class="step">
+        <div class="step" onclick="setDsarStep(this)">
           <div class="step-title">3. Redaction</div>
           <div class="step-desc">Third-party PII and commercially sensitive information is identified and redacted automatically. Redaction decisions are recorded for audit.</div>
         </div>
-        <div class="step">
+        <div class="step" onclick="setDsarStep(this)">
           <div class="step-title">4. Response package</div>
           <div class="step-desc">A complete package is compiled — cover letter, redacted data, exemption summary, and compliance documentation — and placed in the dashboard for lawyer approval before sending.</div>
         </div>
@@ -865,6 +860,11 @@ document.getElementById('contactModal').addEventListener('click', function(e) {
 
 function toggleMobileNav() {
   document.getElementById('mobileNav').classList.toggle('active');
+}
+
+function setDsarStep(el) {
+  document.querySelectorAll('#dsar-steps .step').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
 }
 
 const howVisuals = [
