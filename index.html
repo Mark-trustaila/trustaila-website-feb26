@@ -642,6 +642,78 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 
 <hr>
 
+<!-- BRANDVAULT — TRADEMARK PORTFOLIO MANAGEMENT -->
+<section>
+  <h2 class="section-title">BrandVault</h2>
+  <p class="section-sub">Real-time trademark portfolio management — with an AI agent that handles the routine work.</p>
+  <div style="display:flex;justify-content:center;">
+    <div class="feature-container">
+      <div class="steps" id="bv-steps">
+        <div class="step active" onclick="setStep(this,'bv-steps')">
+          <div class="step-title">1. Live portfolio data</div>
+          <div class="step-desc">Trademark data is pulled directly from registries and updated automatically when status or events change. No manual spreadsheets. No stale records.</div>
+        </div>
+        <div class="step" onclick="setStep(this,'bv-steps')">
+          <div class="step-title">2. Renewal and deadline tracking</div>
+          <div class="step-desc">Upcoming renewals and contentious deadlines surface automatically in the dashboard. In-house counsel sees exactly what needs attention and when — nothing slips through.</div>
+        </div>
+        <div class="step" onclick="setStep(this,'bv-steps')">
+          <div class="step-title">3. Email monitoring</div>
+          <div class="step-desc">Registry correspondence is monitored and matched to the correct marks. Office actions automatically create new matters and deadlines, with draft responses prepared for review.</div>
+        </div>
+        <div class="step" onclick="setStep(this,'bv-steps')">
+          <div class="step-title">4. Trademark AI agent</div>
+          <div class="step-desc">A dedicated trademark agent automates routine tasks — renewals, reclassifications, standard filings, and form preparation — so the team focuses on contentious matters and strategic decisions.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <img src="images/brandvault1.png" alt="BrandVault dashboard showing trademark portfolio overview" style="width:100%;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.10);">
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:32px;">
+    <span style="display:inline-block;background:#fef3c7;color:#92400e;font-size:0.8rem;font-weight:600;padding:5px 14px;border-radius:20px;">Private beta</span>
+  </p>
+</section>
+
+<hr>
+
+<!-- INNOVAULT — PATENT PORTFOLIO MANAGEMENT -->
+<section>
+  <h2 class="section-title">InnoVault</h2>
+  <p class="section-sub">Patent portfolio visibility across jurisdictions — with an AI agent that keeps everything current.</p>
+  <div style="display:flex;justify-content:center;">
+    <div class="feature-container">
+      <div class="steps" id="iv-steps">
+        <div class="step active" onclick="setStep(this,'iv-steps')">
+          <div class="step-title">1. Multi-jurisdiction portfolio</div>
+          <div class="step-desc">Patent data pulled directly from registries across jurisdictions. Annuity deadlines, examination status, and grant events tracked in one place — organised by family.</div>
+        </div>
+        <div class="step" onclick="setStep(this,'iv-steps')">
+          <div class="step-title">2. Annuity and deadline management</div>
+          <div class="step-desc">Upcoming annuity payments and pending examinations surface automatically. Clear visibility on what needs action, across every office and jurisdiction.</div>
+        </div>
+        <div class="step" onclick="setStep(this,'iv-steps')">
+          <div class="step-title">3. Office action monitoring</div>
+          <div class="step-desc">Email from patent offices is parsed and matched to the correct patents. New matters and deadlines are created automatically, with draft responses prepared for review.</div>
+        </div>
+        <div class="step" onclick="setStep(this,'iv-steps')">
+          <div class="step-title">4. Patent AI agent</div>
+          <div class="step-desc">A dedicated patent agent manages routine annuity payments, deadline tracking, and form preparation — keeping the portfolio current without manual chasing.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <img src="images/innovault1.png" alt="InnoVault dashboard showing patent portfolio overview" style="width:100%;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.10);">
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:32px;">
+    <span style="display:inline-block;background:#fef3c7;color:#92400e;font-size:0.8rem;font-weight:600;padding:5px 14px;border-radius:20px;">Private beta</span>
+  </p>
+</section>
+
+<hr>
+
 <!-- PROBLEM / SOLUTION — PII & SECURITY -->
 <section>
   <h2 class="section-title">Want to use AI, but worried about security?</h2>
@@ -865,6 +937,11 @@ async function submitModal(btn) {
     btn.textContent = 'Request access';
     alert('Something went wrong. Please email us at hello@trustaila.com');
   }
+}
+
+function setStep(el, containerId) {
+  document.querySelectorAll('#' + containerId + ' .step').forEach(s => s.classList.remove('active'));
+  el.classList.add('active');
 }
 
 function openModal() {
