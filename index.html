@@ -642,6 +642,45 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
 
 <hr>
 
+<!-- HOW IT WORKS -->
+<section id="howitworks">
+  <h2 class="section-title">How it works</h2>
+  <p class="section-sub">AiLA connects to your systems and handles the work. You review and approve.</p>
+  <div style="display:flex;justify-content:center;">
+    <div class="feature-container">
+      <div class="steps" id="how-steps">
+        <div class="step active" onclick="setHowStep(this, 0)">
+          <div class="step-title">Connect</div>
+          <div class="step-desc">AiLA connects to Outlook, Exchange, SharePoint, and Microsoft 365. Also integrates with CRM, DMS, and HR systems via MCP connectors. Setup in hours, not weeks.</div>
+        </div>
+        <div class="step" onclick="setHowStep(this, 1)">
+          <div class="step-title">Classify</div>
+          <div class="step-desc">Incoming requests are automatically classified by type — DSAR, legal query, FOI, complaint — and by urgency. Classification reasoning is shown so lawyers can verify or override.</div>
+        </div>
+        <div class="step" onclick="setHowStep(this, 2)">
+          <div class="step-title">Execute</div>
+          <div class="step-desc">AiLA retrieves data, applies redaction, drafts correspondence, and assembles response packages. The work happens automatically, in the background, inside your systems.</div>
+        </div>
+        <div class="step" onclick="setHowStep(this, 3)">
+          <div class="step-title">Review and approve</div>
+          <div class="step-desc">Everything lands in the AiLA dashboard for lawyer review. Edit if needed, then approve. Full audit trail maintained throughout.</div>
+        </div>
+      </div>
+      <div class="feature-image" id="how-visual" style="background:#f3f4f6;border-radius:10px;min-height:280px;padding:28px;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;">
+        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9ca3af;">AiLA Dashboard</div>
+        <div style="font-weight:700;font-size:1rem;color:#111827;">Outlook · SharePoint · Microsoft 365</div>
+        <div style="font-size:0.875rem;color:#6b7280;line-height:1.6;">Connected to your existing systems. No new stack. No data leaving your environment.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
+          <span style="background:#dcfce7;color:#166534;font-size:0.75rem;font-weight:600;padding:3px 10px;border-radius:20px;">Live</span>
+          <span style="background:#e0e7ff;color:#3730a3;font-size:0.75rem;font-weight:600;padding:3px 10px;border-radius:20px;">UK data residency</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr>
+
 <!-- BRANDVAULT — TRADEMARK PORTFOLIO MANAGEMENT -->
 <section>
   <h2 class="section-title">BrandVault</h2>
@@ -667,7 +706,7 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
         </div>
       </div>
       <div style="display:flex;align-items:center;justify-content:center;">
-        <img src="images/brandvault_boohoo.png" alt="BrandVault dashboard showing trademark portfolio overview" style="width:100%;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.10);">
+        <img src="images/brandvault1.png" alt="BrandVault dashboard showing trademark portfolio overview" style="width:100%;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.10);">
       </div>
     </div>
   </div>
@@ -736,45 +775,6 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);
         <li>All data stays within your Azure environment. UK data residency by default.</li>
         <li>Every interaction is logged for audit and compliance — full trail, always available.</li>
       </ul>
-    </div>
-  </div>
-</section>
-
-<hr>
-
-<!-- HOW IT WORKS -->
-<section id="howitworks">
-  <h2 class="section-title">How it works</h2>
-  <p class="section-sub">AiLA connects to your systems and handles the work. You review and approve.</p>
-  <div style="display:flex;justify-content:center;">
-    <div class="feature-container">
-      <div class="steps" id="how-steps">
-        <div class="step active" onclick="setHowStep(this, 0)">
-          <div class="step-title">Connect</div>
-          <div class="step-desc">AiLA connects to Outlook, Exchange, SharePoint, and Microsoft 365. Also integrates with CRM, DMS, and HR systems via MCP connectors. Setup in hours, not weeks.</div>
-        </div>
-        <div class="step" onclick="setHowStep(this, 1)">
-          <div class="step-title">Classify</div>
-          <div class="step-desc">Incoming requests are automatically classified by type — DSAR, legal query, FOI, complaint — and by urgency. Classification reasoning is shown so lawyers can verify or override.</div>
-        </div>
-        <div class="step" onclick="setHowStep(this, 2)">
-          <div class="step-title">Execute</div>
-          <div class="step-desc">AiLA retrieves data, applies redaction, drafts correspondence, and assembles response packages. The work happens automatically, in the background, inside your systems.</div>
-        </div>
-        <div class="step" onclick="setHowStep(this, 3)">
-          <div class="step-title">Review and approve</div>
-          <div class="step-desc">Everything lands in the AiLA dashboard for lawyer review. Edit if needed, then approve. Full audit trail maintained throughout.</div>
-        </div>
-      </div>
-      <div class="feature-image" id="how-visual" style="background:#f3f4f6;border-radius:10px;min-height:280px;padding:28px;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;">
-        <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9ca3af;">AiLA Dashboard</div>
-        <div style="font-weight:700;font-size:1rem;color:#111827;">Outlook · SharePoint · Microsoft 365</div>
-        <div style="font-size:0.875rem;color:#6b7280;line-height:1.6;">Connected to your existing systems. No new stack. No data leaving your environment.</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">
-          <span style="background:#dcfce7;color:#166534;font-size:0.75rem;font-weight:600;padding:3px 10px;border-radius:20px;">Live</span>
-          <span style="background:#e0e7ff;color:#3730a3;font-size:0.75rem;font-weight:600;padding:3px 10px;border-radius:20px;">UK data residency</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
