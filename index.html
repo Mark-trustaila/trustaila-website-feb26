@@ -1048,13 +1048,13 @@ function toggleFaq(el) {
             onAccept: () => {
               // Load GA4 only after consent
               const s = document.createElement('script');
-              s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0NE4NLX6BT';
+              s.src = 'https://www.googletagmanager.com/gtag/js?id=G-0NN13VDQPF';
               s.async = true;
               document.head.appendChild(s);
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-0NE4NLX6BT');
+              gtag('config', 'G-0NN13VDQPF');
             },
             onReject: () => {}
           }
