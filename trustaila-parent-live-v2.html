@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AiLA: The AI legal department</title>
+<meta name="description" content="AiLA runs the legal work that exceeds your organisation's capacity. AI does the routine, your lawyer signs off, and AiLA's own lawyers resolve contentious matters.">
+<meta property="og:title" content="AiLA: The AI legal department">
+<meta property="og:description" content="AI does the routine, your lawyer signs off, and AiLA's own lawyers resolve contentious matters.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.trustaila.com/">
+<meta property="og:image" content="https://www.trustaila.com/og-image.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#101828;
+    --muted:#5b6472;
+    --line:#e7e9ee;
+    --blue:#4f46e5;          /* family accent (Bree indigo) */
+    --blue-deep:#4338ca;
+    --panel:#f8f9fb;
+    --green:#0f7a4d; --green-soft:#e8f4ee;
+    --amber:#a16207; --amber-soft:#fdf3df;
+    --red:#b3402f;   --red-soft:#fbeae7; --red-line:#efc4bb;
+    --teal:#0f766e;  --teal-soft:#e6f2f1;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:'Inter',sans-serif;font-size:16px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 6vw;border-bottom:1px solid var(--line);
+    position:sticky;top:0;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);z-index:10;
+  }
+  .wordmark{font-weight:800;font-size:19px;letter-spacing:-.02em}
+  .wordmark span{color:var(--blue)}
+  nav{font-size:14px;font-weight:500}
+  nav a{color:var(--muted);text-decoration:none;margin-left:22px}
+  nav a:hover,nav a:focus-visible{color:var(--ink)}
+  nav a.cta{color:#fff;background:var(--ink);padding:10px 18px;border-radius:8px}
+  nav a.cta:hover,nav a.cta:focus-visible{background:#243046}
+  a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+
+  /* ---- HERO ---- */
+  .hero{
+    padding:10vh 6vw 9vh;max-width:1240px;margin:0 auto;
+    display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:5vw;align-items:center;
+  }
+  h1{font-size:clamp(40px,5.2vw,66px);font-weight:800;letter-spacing:-.03em;line-height:1.03}
+  .hero .lede{margin-top:22px;max-width:34em;font-size:17.5px;color:var(--muted)}
+  .routes{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+  .route{
+    display:inline-block;font-weight:600;font-size:15px;
+    border:1px solid var(--line);color:var(--ink);
+    padding:13px 22px;border-radius:10px;text-decoration:none;
+    transition:border-color .12s ease, background .12s ease;
+  }
+  .route:hover,.route:focus-visible{border-color:var(--blue);background:#fafaff}
+  .route.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+  .route.primary:hover,.route.primary:focus-visible{background:var(--blue-deep)}
+  .subline{margin-top:16px;font-size:13.5px;color:var(--muted)}
+
+  /* Escalation handoff card: the parent's hero object */
+  .handoff{
+    background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:0 24px 60px rgba(16,24,40,.10);
+  }
+  .h-head{
+    padding:14px 20px;border-bottom:1px solid var(--line);background:var(--panel);
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  }
+  .h-body{padding:20px}
+  .step{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .s-dot{
+    width:30px;height:30px;border-radius:8px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;
+  }
+  .s-dot.bv{background:var(--blue);color:#fff}
+  .s-dot.you{background:var(--line);color:var(--muted)}
+  .s-dot.law{background:var(--ink);color:#fff}
+  .step .s-who{font-weight:700;font-size:13.5px}
+  .step .s-who .t{font-weight:400;font-size:11px;color:var(--muted);margin-left:8px}
+  .step .s-txt{font-size:13.5px;color:var(--ink);margin-top:2px}
+  .chip{
+    display:inline-block;margin:6px 6px 0 0;padding:4px 10px;border-radius:99px;
+    font-size:11px;font-weight:600;border:1px solid var(--line);color:var(--muted);background:var(--panel);
+  }
+  .chip.red{color:var(--red);background:var(--red-soft);border-color:var(--red-line)}
+  .h-foot{
+    padding:12px 20px;border-top:1px solid var(--line);background:var(--panel);
+    font-size:12px;color:var(--muted);
+  }
+
+  /* ---- SECTION SCAFFOLD ---- */
+  section{padding:10vh 6vw;border-top:1px solid var(--line)}
+  section .inner{max-width:1200px;margin:0 auto}
+  .kicker{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:700}
+  h2{font-size:clamp(26px,3vw,40px);font-weight:800;letter-spacing:-.02em;margin-top:14px;max-width:22em}
+  .lede2{margin-top:16px;max-width:44em;color:var(--muted)}
+  .alt{background:var(--panel)}
+
+  /* model tiers */
+  .grid3{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .tile{background:#fff;border:1px solid var(--line);border-radius:14px;padding:26px}
+  .alt .tile{background:#fff}
+  section:not(.alt) .tile{background:var(--panel)}
+  .tile h3{font-size:17px;font-weight:700;margin-bottom:9px}
+  .tile p{font-size:14.5px;color:var(--muted)}
+
+  /* why */
+  .why-body{margin-top:22px;max-width:46em}
+  .why-body p{margin-bottom:1.1em;color:var(--ink)}
+  .why-body p strong{font-weight:700}
+  .why-body .big{font-size:19px;font-weight:600;line-height:1.5}
+
+  /* solutions */
+  .sols{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .sol{
+    background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px;
+    display:flex;flex-direction:column;
+  }
+  .sol .tilehead{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .monogram{
+    width:40px;height:40px;border-radius:10px;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff;
+  }
+  .monogram.bv{background:var(--blue)}
+  .monogram.dd{background:var(--teal)}
+  .monogram.iv{background:var(--ink)}
+  .sol .s-name{font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .sol .s-cat{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .sol p{font-size:14.5px;color:var(--muted);flex:1}
+  .sol .go{
+    margin-top:18px;font-size:14px;font-weight:700;color:var(--blue);text-decoration:none;
+  }
+  .sol .go:hover,.sol .go:focus-visible{text-decoration:underline}
+  .beta{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--amber-soft);color:var(--amber);border-radius:99px;padding:3px 10px;margin-left:8px;vertical-align:2px}
+  .pill-planned{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    background:var(--panel);color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:3px 10px;margin-left:8px;vertical-align:2px}
+  .sol.dev{border-color:#e6cf9a}
+  .sol.planned{background:transparent;border-style:dashed}
+  .sol.planned .s-name,.sol.planned p{color:var(--muted)}
+  .sol.planned .go{color:var(--muted)}
+  .monogram.ghost{background:transparent;border:1.5px dashed #cdd2db;color:#b3bac5}
+
+  /* escalation statement */
+  .esc-scope{
+    margin-top:28px;border:1px solid var(--line);border-radius:14px;padding:22px 26px;background:#fff;
+    max-width:52em;font-size:14.5px;color:var(--muted);
+  }
+  .esc-scope strong{color:var(--ink)}
+
+  /* security */
+  .sec-grid{margin-top:40px;display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:900px}
+  .sec{border:1px solid var(--line);border-radius:12px;padding:20px 22px;background:#fff}
+  .sec h3{font-size:15px;font-weight:700;margin-bottom:6px}
+  .sec p{font-size:13.5px;color:var(--muted)}
+
+  /* team */
+  .people{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:26px;max-width:980px}
+  .person{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px}
+  .p-name{font-size:18px;font-weight:800;letter-spacing:-.01em}
+  .p-role{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700;margin:4px 0 12px}
+  .person p{font-size:14.5px;color:var(--muted)}
+
+  /* faq */
+  .faq{margin-top:36px;max-width:56em}
+  details{border-bottom:1px solid var(--line);padding:18px 4px}
+  summary{font-weight:700;font-size:16px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:14px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";color:var(--muted);font-weight:500}
+  details[open] summary::after{content:"–"}
+  details p{margin-top:12px;font-size:14.5px;color:var(--muted);max-width:48em}
+
+  /* closing */
+  .closing{text-align:center}
+  .closing h2{margin-left:auto;margin-right:auto}
+  .closing .routes{justify-content:center}
+
+  .demo-form{margin-top:30px;max-width:460px;margin-left:auto;margin-right:auto;text-align:left}
+  .demo-form label{display:block;font-size:13px;font-weight:600;margin:14px 0 5px}
+  .demo-form input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:9px;font-family:'Inter',sans-serif;font-size:15px;background:#fff}
+  .demo-form input:focus{outline:2px solid var(--indigo);outline-offset:1px;border-color:var(--indigo)}
+  .demo-form button{width:100%;margin-top:20px;font-weight:600;font-size:16px;background:var(--indigo);color:#fff;padding:15px;border-radius:10px;border:none;cursor:pointer}
+  .demo-note{margin-top:12px;font-size:12.5px;color:var(--muted);text-align:center}
+  footer{border-top:1px solid var(--line);padding:24px 6vw;font-size:12.5px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+  @media(max-width:960px){
+    .hero{grid-template-columns:1fr;gap:48px;padding-top:7vh}
+    .grid3,.sols{grid-template-columns:1fr}
+    .sec-grid,.people{grid-template-columns:1fr}
+    nav a{margin-left:12px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wordmark">AiLA<span>.</span></div>
+  <nav aria-label="Main">
+    <a href="#model">The model</a>
+    <a href="#solutions">Solutions</a>
+    <a href="#escalation">Escalation</a>
+    <a href="#security">Security</a>
+    <a href="#team">Team</a>
+    <a href="#solutions" class="cta">Get started</a>
+  </nav>
+</header>
+
+<section class="hero" style="border-top:none">
+  <div>
+    <h1>The AI legal department.</h1>
+    <p class="lede">AiLA runs the legal work that exceeds your organisation's capacity. AI handles the routine: portfolios, statutory requests, deadlines, correspondence. Your lawyer signs off on everything that matters. And if a matter becomes contentious, AiLA's own lawyers take it, working AI-assisted at a fraction of law-firm cost.</p>
+    <div class="routes">
+      <a class="route primary" href="#solutions">Trademarks</a>
+      <a class="route" href="#solutions">Privacy &amp; data</a>
+      <a class="route" href="#solutions">Employment</a>
+      <a class="route" href="#solutions">Patents</a>
+      <a class="route" href="#solutions">Contracts</a>
+      <a class="route" href="#solutions">Entity management</a>
+    </div>
+    <p class="subline">We solve pain points. Choose yours, and we'll show you how we handle it.</p>
+  </div>
+
+  <!-- Escalation handoff: the parent's hero object -->
+  <div class="handoff" role="img" aria-label="Example of a contested matter escalating from the AI to an AiLA lawyer with full context attached">
+    <div class="h-head">
+      <span>Matter escalation</span>
+      <span>opposition · UKIPO</span>
+    </div>
+    <div class="h-body">
+      <div class="step">
+        <div class="s-dot bv">BV</div>
+        <div>
+          <div class="s-who">BrandVault <span class="t">Mon 09:40</span></div>
+          <div class="s-txt">Watch alert: MERIDIAM (cl. 25) conflicts with your MERIDIAN. Grounds to oppose. Draft notice prepared.</div>
+          <span class="chip red">Opposition window closes 14 Oct</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="s-dot you">GC</div>
+        <div>
+          <div class="s-who">Your lawyer <span class="t">Mon 11:02</span></div>
+          <div class="s-txt">Approved. Escalate to AiLA Legal to run the opposition.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="s-dot law">Ai</div>
+        <div>
+          <div class="s-who">AiLA Legal <span class="t">Mon 11:04</span></div>
+          <div class="s-txt">Matter opened. Full history attached: the watch analysis, similarity scoring, your portfolio record, and the draft notice. No briefing call needed.</div>
+          <span class="chip">Draft TM7 · similarity report · portfolio record</span>
+        </div>
+      </div>
+    </div>
+    <div class="h-foot">The context travels with the matter. Escalation starts with the work already done.</div>
+  </div>
+</section>
+
+<section class="alt" id="model">
+  <div class="inner">
+    <div class="kicker">The model</div>
+    <h2>Routine work done, your decisions prepared, contentious matters resolved</h2>
+    <div class="grid3">
+      <div class="tile">
+        <h3>AI does the volume.</h3>
+        <p>It monitors the registries, tracks every deadline, handles the correspondence, and prepares the first drafts, continuously and without being asked, so none of it lands back on your desk.</p>
+      </div>
+      <div class="tile">
+        <h3>You sign off.</h3>
+        <p>Everything consequential comes to your lawyer with the evidence already attached, ready to approve or decline. Nothing is sent or filed without you.</p>
+      </div>
+      <div class="tile">
+        <h3>Our lawyers take the rest.</h3>
+        <p>When a matter turns contentious, a trademark opposition, a contested subject access request, a difficult regulator, it escalates to AiLA's lawyers, who pick it up AI-assisted with the full history already in the system. With no briefing calls or catch-up fees.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="film">
+  <div class="inner">
+    <div class="kicker">The platform</div>
+    <h2>See it working</h2>
+    <div style="border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 18px 50px rgba(15,23,42,.10);margin-top:26px">
+      <video autoplay controls muted loop playsinline preload="auto" style="display:block;width:100%">
+        <source src="/AiLA%20second%20video%20alt.webm" type="video/webm">
+        <source src="/AiLA%20second%20video.mp4" type="video/mp4">
+        Your browser doesn't support embedded video.
+      </video>
+    </div>
+    <p style="margin-top:12px;font-size:13.5px;color:var(--muted);text-align:center">The AiLA dashboard: requests classified, matters tracked, work prepared for your approval.</p>
+  </div>
+</section>
+
+<section class="alt" id="why">
+  <div class="inner">
+    <div class="kicker">Why AiLA</div>
+    <h2>Built for organisations whose obligations exceed capacity</h2>
+    <div class="why-body">
+      <p class="big">IT, payroll, and facilities were contracted out decades ago. Routine work of the legal function is next.</p>
+      <p>Legal work, for most organisations, is a cost carried for risk and compliance. It's necessary, process driven and chronically understaffed. The firms who could take it off your hands don't want the business, because they build their engagements for the multinationals they consult for, and their minimums exclude everyone else. There are software tools, but they only organise the work: you still have to do it.</p>
+      <p>So if you are a legal team of one or two inside a mid-market company, or an information governance team inside a public body, you have spent years choosing between doing it yourself and overpaying for it. <strong>AI changes the economics of serving you properly, and that is where AiLA excels.</strong></p>
+    </div>
+  </div>
+</section>
+
+<section id="solutions">
+  <div class="inner">
+    <div class="kicker">The solutions</div>
+    <h2>What we do</h2>
+    <div class="sols">
+
+      <div class="sol">
+        <div class="tilehead">
+          <div class="monogram bv">BV</div>
+          <div>
+            <div class="s-name">BrandVault</div>
+            <div class="s-cat">Trademarks</div>
+          </div>
+        </div>
+        <p>Your trademark portfolio, managed. BrandVault tracks the deadlines, watches for threats, and assesses each renewal against commercial evidence before asking for your decision. Bree, its AI trademark paralegal, works in your Slack from day one, and disputes escalate to lawyers who already know the portfolio.</p>
+        <a class="go" href="https://www.getbrandvault.com">Show me my portfolio →</a>
+      </div>
+
+      <div class="sol">
+        <div class="tilehead">
+          <div class="monogram dd">DD</div>
+          <div>
+            <div class="s-name">DutyDesk</div>
+            <div class="s-cat">Data protection &amp; FOI</div>
+          </div>
+        </div>
+        <p>Subject access requests, FOI requests, and ICO correspondence handled from receipt to response: screened, gathered, redacted, and packaged for your approval, with the statutory clock tracked from the moment each request lands. When a matter is contested, it escalates.</p>
+        <a class="go" href="https://dsar-readiness.vercel.app/">Assess your readiness →</a>
+      </div>
+
+      <div class="sol planned">
+        <div class="tilehead">
+          <div class="monogram ghost">·</div>
+          <div>
+            <div class="s-name">Employment <span class="pill-planned">Planned</span></div>
+          </div>
+        </div>
+        <p>The documents and processes every employer carries: contracts, handbooks, policies, and the meetings, letters, and consultations that HR issues must follow, prepared and tracked on the same model, with contentious matters escalated.</p>
+        <a class="go" href="#access">Coming later. Tell us if this is where it hurts →</a>
+      </div>
+
+      <div class="sol dev">
+        <div class="tilehead">
+          <div class="monogram iv">IV</div>
+          <div>
+            <div class="s-name">InnoVault <span class="beta">Private beta</span></div>
+            <div class="s-cat">Patents</div>
+          </div>
+        </div>
+        <p>Annuities, deadlines, and office actions across jurisdictions, kept current without anyone having to chase them. In private beta with early portfolios now.</p>
+        <a class="go" href="#access">Register interest →</a>
+      </div>
+
+      <div class="sol planned">
+        <div class="tilehead">
+          <div class="monogram ghost">·</div>
+          <div>
+            <div class="s-name">Contracts <span class="pill-planned">Planned</span></div>
+          </div>
+        </div>
+        <p>Everyday agreements drafted, reviewed, and tracked through to signature and renewal, on the same model.</p>
+        <a class="go" href="#access">Coming later. Tell us if this is where it hurts →</a>
+      </div>
+
+      <div class="sol planned">
+        <div class="tilehead">
+          <div class="monogram ghost">·</div>
+          <div>
+            <div class="s-name">Corporate &amp; entity management <span class="pill-planned">Planned</span></div>
+          </div>
+        </div>
+        <p>Filings, registers, and corporate deadlines kept current across the group.</p>
+        <a class="go" href="#access">Coming later. Tell us if this is where it hurts →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="escalation">
+  <div class="inner">
+    <div class="kicker">Escalation</div>
+    <h2>We resolve contentious matters in a way software never will</h2>
+    <p class="lede2">Every AiLA solution carries the same promise. When a matter exceeds the routine, an opposition, a contested access request, a difficult regulator, AiLA's own lawyers take it on, working AI-assisted on a matter whose full history is already in the system. Escalation starts with context, not with a briefing call and a discovery invoice.</p>
+    <div class="esc-scope">
+      <strong>What escalation covers:</strong> contentious matters before the registries and regulators, in each solution's domain. Where a matter heads to court, we prepare the file and work alongside your chosen litigators.
+    </div>
+  </div>
+</section>
+
+<section id="hood">
+  <div class="inner">
+    <div class="kicker">How we work</div>
+    <h2>Not just a chat window</h2>
+    <p class="lede2">Each AiLA solution pairs a leading AI model with a harness built for its domain. Official records sit underneath, so answers are grounded and traceable. Deadlines and arithmetic come from deterministic rules, because those are not things a model should ever guess at. Hard limits govern what the AI may do without your approval. The value is in the domain knowledge embedded in that agentic layer, and in the official records beneath it.</p>
+  </div>
+</section>
+
+<section class="alt" id="security">
+  <div class="inner">
+    <div class="kicker">Security</div>
+    <h2>Your data stays yours</h2>
+    <p class="lede2">Legal work runs on confidential information, so the guarantees here are short and unconditional. Security-reviewed by Baker McKenzie and DLA Piper; part of Barclays Eagle Labs and Lawtech UK.</p>
+    <div class="sec-grid">
+      <div class="sec"><h3>UK data residency</h3><p>Client data processed and stored in the UK.</p></div>
+      <div class="sec"><h3>Encrypted throughout</h3><p>All traffic and documents encrypted in transit and at rest.</p></div>
+      <div class="sec"><h3>Audited actions</h3><p>Every action taken on your behalf is logged with a reason and available for review.</p></div>
+      <div class="sec"><h3>No AI training on your data</h3><p>Your matters are never used to train models.</p></div>
+      <div class="sec"><h3>Approval gates</h3><p>Nothing consequential is sent, filed, or disclosed without your sign-off.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="team">
+  <div class="inner">
+    <div class="kicker">Who's behind it</div>
+    <h2>Built by people who've done this work</h2>
+    <div class="people">
+      <div class="person">
+        <div class="p-name">Mark Kingsley-Williams</div>
+        <div class="p-role">Founder</div>
+        <p>Mark is an IP lawyer with a background in economics and tech startups. He built the first high-volume online trademark service in 2008, and within two years it was filing more UK and EU trademarks than any other firm, while he represented clients in disputes before the UKIPO and appeals before the Appointed Person. He went on to found LawPanel, an IP management software firm used by trademark practitioners in the UK and US that passed technical evaluations with several top-five global law firms. AiLA is the third act: the AI legal department, combining AI models harnessed to legal work with lawyers who stand behind it.</p>
+      </div>
+      <div class="person">
+        <div class="p-name">Sebastian Guerrero</div>
+        <div class="p-role">Lead Developer</div>
+        <p>Sebastian is a solution architect and full-stack engineer with twenty-five years of shipping production software, most recently as a Solution Architect at Chevron, designing cloud, data and AI systems on Azure. Before that he spent nearly seven years as lead developer at LawPanel, where he built the cloud IP management platform used by trademark practitioners in the UK and US. At AiLA he leads engineering, harnessing AI models to the deterministic rules, official data and approval gates that legal work depends on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="inner">
+    <div class="kicker">FAQ</div>
+    <h2>Questions you may have</h2>
+    <div class="faq">
+      <details>
+        <summary>Is AiLA a law firm?</summary>
+        <p>No, and for the work it covers it doesn't need to be. The routine and contentious registry and regulatory work AiLA handles is not reserved legal activity in the UK. Where a matter does head to court, AiLA prepares the file and works alongside your chosen litigators.</p>
+      </details>
+      <details>
+        <summary>Who actually does the work?</summary>
+        <p>The AI does the volume: the monitoring, the drafting, the deadline tracking, the correspondence. Your own lawyer approves everything consequential before it goes anywhere. And when a matter escalates, AiLA's lawyers take it, working with the AI rather than instead of it.</p>
+      </details>
+      <details>
+        <summary>What does it cost?</summary>
+        <p>Each solution is priced as a monthly retainer based on scope and volume, the way an accountant charges rather than the way software does. Escalated matters are quoted individually before any work begins, and there are no per-seat charges.</p>
+      </details>
+      <details>
+        <summary>We're a public body. Does this work for us?</summary>
+        <p>Yes, and in the case of FOI it can only work for you, since FOI applies solely to public authorities. DutyDesk is built for the request volumes and statutory deadlines that information governance teams carry. Procurement routes are being established; ask us where we are with your framework.</p>
+      </details>
+      <details>
+        <summary>Can we take one solution without the others?</summary>
+        <p>Yes. Each solution stands alone, with its own site, onboarding, and pricing, and the escalation promise comes with every one of them.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="closing" id="access">
+  <div class="inner">
+    <div class="kicker">Get started</div>
+    <h2>Put the routine under management</h2>
+    <p class="lede2" style="margin-left:auto;margin-right:auto">Tell us where the pain is worst, and we'll show you what it looks like handled.</p>
+    <form class="demo-form" action="https://formspree.io/f/mjgerjao" method="POST">
+      <label for="a-name">Your name</label>
+      <input id="a-name" type="text" name="name" required autocomplete="name">
+      <label for="a-email">Work email</label>
+      <input id="a-email" type="email" name="email" required autocomplete="email">
+      <label for="a-company">Organisation</label>
+      <input id="a-company" type="text" name="company" required autocomplete="organization">
+      <label for="a-area">Where it hurts (trademarks, privacy &amp; data, employment, patents, contracts, entity management)</label>
+      <input id="a-area" type="text" name="area">
+      <input type="hidden" name="_subject" value="AiLA access request">
+      <button type="submit">Request access</button>
+      <p class="demo-note">We'll come back within one working day.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span>AiLA: The AI legal department. Routine work done, your decisions prepared, contentious matters resolved.</span>
+  <span>BrandVault · DutyDesk · InnoVault · <a href="/privacy.html" style="color:inherit">Privacy</a> · © 2026 AiLA AI Ltd</span>
+</footer>
+
+<script type="text/javascript">
+_linkedin_partner_id = "8728946";
+window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+</script>
+<script type="text/javascript">
+(function(l) {
+if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])};
+window.lintrk.q=[]}
+var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})(window.lintrk);
+</script>
+<noscript>
+<img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=8728946&fmt=gif" />
+</noscript>
+</body>
+</html>
